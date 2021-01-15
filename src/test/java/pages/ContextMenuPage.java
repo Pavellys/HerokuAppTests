@@ -9,31 +9,30 @@ public class ContextMenuPage extends BasePage {
         super(driver);
     }
 
-    Actions actions = new Actions(driver);
     public static final String CONTEXT_MENU_URL = "http://the-internet.herokuapp.com/context_menu";
     public static final By ELEMENT_RIGHT_CLICK = By.xpath("//*[@id='hot-spot']");
     public final String EXP_RESULT_ALERT = "You selected a context menu";
-    /*Open website
-    http://the-internet.herokuapp.com/context_menu
+    /**
+     * Open website http://the-internet.herokuapp.com/context_menu
      */
     public void openPage() {
         driver.get(CONTEXT_MENU_URL);
     }
-    /*
+    /**
     Find element for test and context click
      */
     public void rightClickToElement() {
+        Actions actions = new Actions(driver);
         WebElement element = driver.findElement(ELEMENT_RIGHT_CLICK);
         actions.contextClick(element).perform();
         wait.until(ExpectedConditions.alertIsPresent());
     }
-    /*
-    Checking the warning after a click
+    /**
+    *Checking the warning after a click
      */
-    public String isAlert(){
+    public String getAlertText(){
         Alert alert = driver.switchTo().alert();
-        String alertText = alert.getText();
-        return alertText;
+        return alert.getText();
     }
 }
 

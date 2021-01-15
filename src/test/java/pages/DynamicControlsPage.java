@@ -10,31 +10,27 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class DynamicControlsPage extends BasePage {
     public static final String DYNAMIC_CONTROLS_URL = "http://the-internet.herokuapp.com/dynamic_controls";
     public final By CHECKBOX_ELEMENT = By.id("checkbox");
-    public final By BUTTON_ENABLE = By.xpath("/html/body/div[2]/div/div[1]/form[2]/button");
+    public final By BUTTON_ENABLE = By.xpath("//*[text() = 'Enable']");
     public final By FIELD_INPUT = By.xpath("//*[@id='input-example']/input");
     public final By BUTTON_REMOVE = By.xpath("//*[@id='checkbox-example']/button");
-    public final By TEXT_AFTER_CLICK_ENABLE = By.xpath("/html/body/div[2]/div/div[1]/form[2]/p");
-    public final By TEXT_AFTER_BUTTON = By.id("message");
-    public final boolean EXP_RESULT_CHECKBOX = false;
-    public final boolean EXP_RESULT_INPUTFIELD = true;
-    public final String EXP_RESULT_MESSAGE_CHECKBOX = "It's gone!";
-    public final String EXP_RESULT_MESSAGE_INPUTFIELD = "It's enabled!";
+    public final By TEXT_AFTER_CLICK_ENABLE = By.id("message");
+    public final By REMOVE_RESULT_TEXT = By.id("message");
 
     public DynamicControlsPage(WebDriver driver) {
         super(driver);
     }
-    /*
-    Open website http://the-internet.herokuapp.com/dynamic_controls
+    /**
+    *Open website http://the-internet.herokuapp.com/dynamic_controls
      */
     @Override
     public void openPage() {
         driver.get(DYNAMIC_CONTROLS_URL);
 
     }
-    /*
-    Checking checkbox
+    /**
+    *Checking checkbox
      */
-    public boolean isCheckbox() {
+    public boolean isCheckboxDisplayed() {
         try {
             driver.findElement(CHECKBOX_ELEMENT).isDisplayed();
             return true;
@@ -42,40 +38,51 @@ public class DynamicControlsPage extends BasePage {
             return false;
         }
     }
-    /*
-    Find element on the path
+    /**
+    *Find element for Checkbox test
      */
-    public WebElement findElementForTest(By element) {
-        return driver.findElement(element);
+    public WebElement findElementForCheckbox() {
+        return driver.findElement(BUTTON_REMOVE);
     }
-    /*
-    Waits until the element disappears
+    /**
+    *Waits until the element disappears
      */
     public void waiterCheckbox() {
         wait.until(ExpectedConditions.invisibilityOfElementLocated(CHECKBOX_ELEMENT));
     }
-    /*
-    Waits until the element to appears
+    /**
+    *Waits until the element to appears
      */
-    public void waiterEnable(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(TEXT_AFTER_BUTTON));
+    public void waitForCheckboxDisplayed(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(REMOVE_RESULT_TEXT));
     }
-    /*
-    Get text after click to button "Remove"
+    /**
+    *Get text after click to button "Remove"
      */
-    public String getTextAfterRemove() {
-        return driver.findElement(TEXT_AFTER_BUTTON).getText();
+    public String getRemoveResultText() {
+        return driver.findElement(REMOVE_RESULT_TEXT).getText();
     }
-    /*
-    Get text after click to button "Enable"
+    /**
+    *Get text after click to button "Enable"
      */
-    public String getTextAfterEnable() {
+    public String getEnableResultText() {
         return driver.findElement(TEXT_AFTER_CLICK_ENABLE).getText();
     }
-    /*
-    Checking input field
+    /**
+    *Checking input field
      */
-    public boolean isEnableInputField(){
+    public boolean isInputFieldEnabled(){
         return driver.findElement(FIELD_INPUT).isEnabled();
+    }
+    /**
+     *Find element for Input field
+     */
+    public WebElement findInputElement() {
+        return driver.findElement(FIELD_INPUT);
+    } /**
+     *Find element for Button Enable
+     */
+    public WebElement findButtonEnable() {
+        return driver.findElement(BUTTON_ENABLE);
     }
 }

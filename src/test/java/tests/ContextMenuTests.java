@@ -10,6 +10,6 @@ public class ContextMenuTests extends BaseTests{
         ContextMenuPage contextMenuPage = new ContextMenuPage(driver);
         contextMenuPage.openPage();
         contextMenuPage.rightClickToElement();
-        Assert.assertEquals(contextMenuPage.isAlert(), contextMenuPage.EXP_RESULT_ALERT, "Results not right" );
+        Assert.assertEquals(contextMenuPage.getAlertText(), contextMenuPage.EXP_RESULT_ALERT, "Results not right" );
     }
 }

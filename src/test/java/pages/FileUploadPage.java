@@ -15,39 +15,39 @@ public class FileUploadPage extends BasePage{
     public FileUploadPage(WebDriver driver) {
         super(driver);
     }
-    /*
-    Open website http://the-internet.herokuapp.com/upload
+    /**
+    *Open website http://the-internet.herokuapp.com/upload
      */
     @Override
     public void openPage() {
         driver.get(FILE_UPLOAD_URL);
     }
-    /*
+    /**
     Enter path to file
      */
-    public void uploadFilePath(){
-        driver.findElement(UPLOAD_PATH).sendKeys(FILE_PATH);
+    public void uploadFile(String filePath){
+        driver.findElement(UPLOAD_PATH).sendKeys(filePath);
     }
-    /*
-    Click to button "Upload"
+    /**
+    *Click to button "Upload"
      */
     public void clickToButtonUpload(By path){
         driver.findElement(path).click();
     }
-    /*
-    Wait until upload file
+    /**
+    *Wait until upload file
      */
     public void waiterUpload() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(PATH_UPLOAD_DONE));
     }
-    /*
-    Checking upload file
+    /**
+    *Checking upload file
      */
     public boolean isFileUploadDone(){
         return driver.findElement(PATH_UPLOAD_DONE).isDisplayed();
     }
-    /*
-    Checking message after upload file
+    /**
+    *Checking message after upload file
      */
     public String getFileUploadText(){
         if(isFileUploadDone()){

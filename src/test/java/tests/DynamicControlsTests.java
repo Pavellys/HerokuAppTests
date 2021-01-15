@@ -6,24 +6,29 @@ import pages.DynamicControlsPage;
 
 
 public class DynamicControlsTests extends BaseTests {
+    public final String EXP_RESULT_MESSAGE_CHECKBOX = "It's gone!";
+    public final String EXP_RESULT_MESSAGE_INPUTFIELD = "It's enabled!";
+    public final boolean expResultCheckbox = false;
+    public final boolean expResultInputfield = true;
+
     @Test
     public void testCheckbox(){
         DynamicControlsPage dynamicControl = new DynamicControlsPage(driver);
         dynamicControl.openPage();
-        dynamicControl.isCheckbox();
-        dynamicControl.findElementForTest(dynamicControl.BUTTON_REMOVE).click();
+        dynamicControl.isCheckboxDisplayed();
+        dynamicControl.findElementForCheckbox().click();
         dynamicControl.waiterCheckbox();
-        Assert.assertEquals(dynamicControl.isCheckbox(), dynamicControl.EXP_RESULT_CHECKBOX);
-        Assert.assertEquals(dynamicControl.getTextAfterRemove(), dynamicControl.EXP_RESULT_MESSAGE_CHECKBOX);
+        Assert.assertEquals(dynamicControl.isCheckboxDisplayed(), expResultCheckbox);
+        Assert.assertEquals(dynamicControl.getRemoveResultText(), EXP_RESULT_MESSAGE_CHECKBOX);
     }
     @Test
     public void testFieldInput(){
         DynamicControlsPage dynamicControl = new DynamicControlsPage(driver);
         dynamicControl.openPage();
-        dynamicControl.findElementForTest(dynamicControl.FIELD_INPUT).isEnabled();
-        dynamicControl.findElementForTest(dynamicControl.BUTTON_ENABLE).click();
-        dynamicControl.waiterEnable();
-        Assert.assertEquals(dynamicControl.getTextAfterEnable(), dynamicControl.EXP_RESULT_MESSAGE_INPUTFIELD);
-        Assert.assertEquals(dynamicControl.isEnableInputField(), dynamicControl.EXP_RESULT_INPUTFIELD);
+        dynamicControl.findInputElement().isEnabled();
+        dynamicControl.findButtonEnable().click();
+        dynamicControl.isInputFieldEnabled();
+        Assert.assertEquals(dynamicControl.getEnableResultText(), EXP_RESULT_MESSAGE_INPUTFIELD);
+        Assert.assertEquals(dynamicControl.isInputFieldEnabled(), expResultInputfield);
     }
 }
